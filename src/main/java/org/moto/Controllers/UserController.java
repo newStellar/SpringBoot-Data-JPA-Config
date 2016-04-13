@@ -9,6 +9,7 @@ import org.moto.Repository.UserRepository;
 import org.moto.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -26,11 +27,11 @@ public class UserController {
     @Autowired
     public UserService userService;
 
-    @RequestMapping(value ="/", method = RequestMethod.GET)
+    @RequestMapping(value ="/{email}", method = RequestMethod.GET)
     @ResponseBody
-    public String home(){
+    public String home(@PathVariable("email") String email) {
 
-        String ans = userService.getUserName();
+        String ans = userService.getNameByEmail(email+".com");
         return "okay "+ ans;
     }
 }
